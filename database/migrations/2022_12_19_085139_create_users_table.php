@@ -14,11 +14,18 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            $table->increments('id');
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('mobile')->unique();
+            $table->decimal('balance', 11, 2)->default(0);
             $table->string('password');
+            $table->tinyInteger('status')->default(1)->comment('0: banned, 1: active');
+            $table->tinyInteger('ev')->default(0)->comment('0: email unverified, 1: email verified');
+            $table->string('ver_code')->nullable()->comment('stores verification code');
+            $table->dateTime('ver_code_send_at')->nullable()->comment('verification send time');
             $table->rememberToken();
             $table->timestamps();
         });

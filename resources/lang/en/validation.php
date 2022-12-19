@@ -142,8 +142,9 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'c_password' => [
+            'same' => 'Password does not match',
+            'required' => 'Kindly confirm password',
         ],
     ],
 
