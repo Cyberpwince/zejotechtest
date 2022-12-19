@@ -22,3 +22,8 @@ Route::prefix('v1')->group(function () {
     Route::post('user/login', [RegisterController::class, 'login']);
 
 });
+Route::prefix('v1')->group(function () {
+    Route::post('admin/register', [RegisterController::class, 'Adminregister']);
+    Route::post('admin/login', [RegisterController::class, 'login']);
+
+});

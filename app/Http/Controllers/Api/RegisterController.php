@@ -19,7 +19,6 @@ class RegisterController extends BaseController
      */
     public function register(Request $request)
     {
-        $request->vcode = rand(10000, 99999);
         $validator = Validator::make($request->all(), [
             'firstname' => 'required',
             'lastname' => 'required',
@@ -29,15 +28,17 @@ class RegisterController extends BaseController
             'password' => 'required|min:6',
             'c_password' => 'required|same:password',
         ]);
-        if($validator->fails())
+        if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
-        else
+        }
+        else{
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $success['token'] =  $user->createToken('UserRegister')->accessToken;
-        $success['name'] =  $user->name;
+        $success['name'] =  $user->username;
         return $this->sendResponse($success, 'User register successfully.');
+    }
 
     }
     /**
