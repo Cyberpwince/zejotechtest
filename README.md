@@ -18,6 +18,10 @@ Before you start the installation process you need to have **installed composer*
 
 Run `php artisan serve` which will start the server at http://localhost:8000 <br>
 
+### Postman Collection Link
+
+https://app.getpostman.com/run-collection/0283d0495cc3d8304847?action=collection%2Fimport <br>
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
