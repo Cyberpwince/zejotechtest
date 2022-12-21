@@ -55,4 +55,41 @@ class AdminController extends BaseController
 
     }
 
+    public function FundUser(Request $request){
+        $validator = Validator::make($request->all(), [
+                'admin_id' => 'required|exists:admins,id',
+                'user_id' => 'required|exists:users,id',
+                'amount' => 'required|numeric',
+
+        ]);
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), 201);
+        }
+        else{
+            $user = User::where('id', $request->user_id)->first();
+            $admin = Admin::where('id', $request->admin_id)->first();
+
+            $oldbal = $user->balance;
+            $balance = number_format(($user->balance + $request->amount), 2, ".", "");
+
+            $user->balance = $balance;
+            $user->save();
+            $success['name'] = $user->username;
+                $success['email'] = $user->email;
+                $success['fund'] = [
+                    'amount' => number_format($request->amount),
+                    'by' => [
+                        'id' => $admin->id,
+                        'name' => $admin->name
+                    ],
+                    'balanceBefore' => number_format($oldbal),
+                    'balanceAfter' => number_format($balance)
+                ];
+
+
+                return $this->sendResponse($success, 'User Fund successful');
+
+        }
+    }
+
 }

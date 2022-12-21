@@ -220,7 +220,7 @@ public function withdrawalid($userid, $withid){
             return $this->sendError('No Withdrawal', ['error' => 'No record found'], 201);
         }
         else{
-              return $this->sendResponse($userwithdraw, 'Withdrawal Record Found');
+              return $this->sendResponse($userwithdraw, 'Withdrawal Record found');
 
         }
 
