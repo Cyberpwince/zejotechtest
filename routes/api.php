@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +18,19 @@ use App\Http\Controllers\Api\RegisterController;
 // Route::prefix('v1/users')->group(function () {
 //     Route::post('register', [RegisterController::class, 'register']);
 // });
+
 Route::prefix('v1')->group(function () {
-    Route::post('user/register', [RegisterController::class, 'register']);
-    Route::post('user/login', [RegisterController::class, 'login']);
+    Route::post('user/register', [UserController::class, 'register']);
+    Route::post('user/login', [UserController::class, 'login']);
+    Route::get('user/emailotp/{id}', [UserController::class, 'requestVerification']);
+    Route::post('user/emailotp', [UserController::class, 'VerifyCode']);
+    Route::post('user/withdraw', [UserController::class, 'withdrawfund']);
+    Route::get('user/withdraw/{id}', [UserController::class, 'withdrawall']);
+    Route::get('user/withdraw/{id}/{withdrawalid}', [UserController::class, 'withdrawalid']);
 
 });
 Route::prefix('v1')->group(function () {
-    Route::post('admin/register', [RegisterController::class, 'Adminregister']);
-    Route::post('admin/login', [RegisterController::class, 'login']);
+    Route::post('admin/register', [AdminController::class, 'Adminregister']);
+    Route::post('admin/login', [AdminController::class, 'Adminlogin']);
 
 });

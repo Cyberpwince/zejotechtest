@@ -42,7 +42,11 @@ return [
         ],
         'api' => [
             'driver' => 'passport',
-            'provider' => 'users',
+            'provider' => 'admins',
+        ],
+        'apiadmin' => [
+            'driver' => 'passport',
+            'provider' => 'admins',
         ],
     ],
 
@@ -67,6 +71,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [
